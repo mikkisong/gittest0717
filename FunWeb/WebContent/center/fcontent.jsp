@@ -124,8 +124,7 @@ if(id!=null){
 
 </div>
 
-
-
+</article>
 
 <script type="text/javascript">
 function del(){
@@ -238,10 +237,10 @@ count: <%=count %>
     }
 
 %>
-</table>
+</table> <!-- comment table -->
 
 </div>
-</article>
+
 
 <script type="text/javascript">
 function commentDelete(idx){
@@ -261,7 +260,7 @@ function commentDelete(idx){
 
 <div id="page_control">
 </div>
-</article>
+
 <!-- 게시판 -->
 <!-- 본문들어가는 곳 -->
 <div class="clear"></div>
