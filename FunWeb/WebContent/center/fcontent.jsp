@@ -117,16 +117,7 @@ if(id!=null){
 </div>
 
 
-<div id="comment">
-<form action="comment.jsp" method="post">
-<tr><td><%=id %></td><td><input type="text" col="100"  ></td></tr>
 
-
-</form>
-<table id="comment">
-
-
-</table>
 
 
 
@@ -176,11 +167,12 @@ function commcheck(){
 if(id!=null){
 	
 	%>
+<input type="hidden" name="parent_num" value="<%=num%>">
 <input type="hidden" name="num" value="<%=num%>">
 <table class="commentWrite">
 <tr><td><%=bb.getName() %> : <input type="hidden" name="id" value=<%=bb.getName() %> readonly="readonly"></td>
 <td><textarea name="content" rows="1" cols="30" onclick="this.value=''">(150자)</textarea>
-<input type="hidden" name="parent_num" value=<%=pageNum %>>
+<input type="hidden" name="pageNum" value=<%=pageNum %>>
 <input type="submit" value="댓글등록" class="btn"></td></tr>
 	<%
 } else{
