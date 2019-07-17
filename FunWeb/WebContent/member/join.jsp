@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Join</title>
 <link href="../css/default.css" rel="stylesheet" type="text/css">
 <link href="../css/subpage.css" rel="stylesheet" type="text/css">
 <!--[if lt IE 9]>
@@ -22,73 +22,160 @@
 
  </script>
  <![endif]-->
+<script src="../script/jquery-3.4.1.js"></script>
 <script type="text/javascript">
 
-function idcheck(){
+
+$(document).ready(function(){
+	$('#idcheck').click(function(){
+		var idval = $('#id').val();
+		if(idval==""){
+			alert("아이디입력하세용");
+			$('#id').focus();
+			return false;
+		}
+		
+		for (var i = 0; i < idval.length; i++) {
+		       ffid = document.fr.id.value.charAt(i)
+		       // 아이디 구성 조건
+		        if (!(ffid >= '0' && ffid <= '9') && !(ffid >= 'a' && ffid <= 'z')) {
+		            alert("아이디는 영문 소문자, 숫자만 입력가능합니다.")
+		           $('#id').focus();
+		            $('#id').select();
+		            return false;
+		        }
+		    
+		    //아이디에 공백 사용하지 않기
+		    if (idval.indexOf(" ") >= 0) {
+		        alert("아이디에 공백을 사용할 수 없습니다.")
+		       $('#id').focus();
+		            $('#id').select();
+		        return false;
+		    }
+		    //아이디 길이 체크 (4~12자)
+		   if (idval.length<4 || idval.length>12) {
+		        alert("아이디를 4~12자까지 입력해주세요.")
+		       $('#id').focus();
+		            $('#id').select();
+		        return false;
+		    }
+			}
+		
+		
+		
+		
+	});
+});
+
+
+
+
+
+// function idcheck(){
 	
-	fid=document.fr.id.value;
-	if(fid==""){
-		alert("아이디를 입력하세요");
-		document.fr.id.focus();
-		return false;
-	} 
-	for (var i = 0; i < document.fr.id.value.length; i++) {
-       ffid = document.fr.id.value.charAt(i)
-        if (!(ffid >= '0' && ffid <= '9') && !(ffid >= 'a' && ffid <= 'z')) {
-            alert("아이디는 영문 소문자, 숫자만 입력가능합니다.")
-            document.fr.id.focus();
-            document.fr.id.select();
-            return false;
-        }
+// 	fid=document.fr.id.value;
+// 	if(fid==""){
+// 		alert("아이디를 입력하세요");
+// 		document.fr.id.focus();
+// 		return false;
+// 	} 
+// 	for (var i = 0; i < document.fr.id.value.length; i++) {
+//        ffid = document.fr.id.value.charAt(i)
+//         if (!(ffid >= '0' && ffid <= '9') && !(ffid >= 'a' && ffid <= 'z')) {
+//             alert("아이디는 영문 소문자, 숫자만 입력가능합니다.")
+//             document.fr.id.focus();
+//             document.fr.id.select();
+//             return false;
+//         }
     
-    //아이디에 공백 사용하지 않기
-    if (document.fr.id.value.indexOf(" ") >= 0) {
-        alert("아이디에 공백을 사용할 수 없습니다.")
-        document.fr.id.focus();
-        document.fr.id.select()
-        return false;
-    }
-    //아이디 길이 체크 (4~12자)
-   if (document.fr.id.value.length<4 || document.fr.id.value.length>12) {
-        alert("아이디를 4~12자까지 입력해주세요.")
-        document.fr.id.focus();
-        document.fr.id.select();
-        return false;
-    }
-	}
-	window.open("idcheck.jsp?fid="+fid, "", "width=400,height=200");
+//     //아이디에 공백 사용하지 않기
+//     if (document.fr.id.value.indexOf(" ") >= 0) {
+//         alert("아이디에 공백을 사용할 수 없습니다.")
+//         document.fr.id.focus();
+//         document.fr.id.select()
+//         return false;
+//     }
+//     //아이디 길이 체크 (4~12자)
+//    if (document.fr.id.value.length<4 || document.fr.id.value.length>12) {
+//         alert("아이디를 4~12자까지 입력해주세요.")
+//         document.fr.id.focus();
+//         document.fr.id.select();
+//         return false;
+//     }
+// 	}
+// 	window.open("idcheck.jsp?fid="+fid, "", "width=400,height=200");
 	
-}
+// }
 
-function emailcheck(){
+
+
+
+$(document).ready(function(){
+	$('#emailcheck').click(function(){
+		var femail = $('#email').val();
+		if(femail==""){
+			alert("이메일주소를 입력하세요");
+			$('#email').focus();
+			return false;
+		} 
+		
+		
+		// 이메일형식 체크
+
+		var exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+
+				if(exptext.test(femail)==false){
+
+			//이메일 형식이 알파벳+숫자@알파벳+숫자.알파벳+숫자 형식이 아닐경우			
+
+			alert("이메일형식이 올바르지 않습니다.");
+
+			$('#email').focus();
+			$('#email').select();
+
+			return false;
+
+		}
+	});
+});
+
+
+
+
+
+
+// function emailcheck(){
 	
-	var femail=document.fr.email.value;
-	if(femail==""){
-		alert("이메일주소를 입력하세요");
-		document.fr.email.focus();
-		return false;
-	} 
+// 	var femail=document.fr.email.value;
+// 	if(femail==""){
+// 		alert("이메일주소를 입력하세요");
+// 		document.fr.email.focus();
+// 		return false;
+// 	} 
 	
 	
-	// 이메일형식 체크
+// 	// 이메일형식 체크
 
-	var exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+// 	var exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
 
-			if(exptext.test(femail)==false){
+// 			if(exptext.test(femail)==false){
 
-		//이메일 형식이 알파벳+숫자@알파벳+숫자.알파벳+숫자 형식이 아닐경우			
+// 		//이메일 형식이 알파벳+숫자@알파벳+숫자.알파벳+숫자 형식이 아닐경우			
 
-		alert("이메일형식이 올바르지 않습니다.");
+// 		alert("이메일형식이 올바르지 않습니다.");
 
-		document.fr.email.focus();
-		document.fr.email.select();
+// 		document.fr.email.focus();
+// 		document.fr.email.select();
 
-		return false;
+// 		return false;
 
-	}
-	window.open("emailcheck.jsp?femail="+femail, "", "width=400,height=200");
+// 	}
+// 	window.open("emailcheck.jsp?femail="+femail, "", "width=400,height=200");
 
-}
+// }
+
+
+
 
 function fincheck(){
 	if(document.fr.id.value==""){
@@ -192,8 +279,8 @@ function fincheck(){
 <fieldset>
 <legend>Basic Info</legend>
 <label>User ID</label>
-<input type="text" name="id" class="id">
-<input type="button" value="dup. check" class="dup" onclick="idcheck()"><br>
+<input type="text" name="id" class="id" id="id">
+<input type="button" value="dup. check" id="idcheck" class="dup" ><br>
 <label>Password</label>
 <input type="password" name="pass"><br>
 <label>Retype Password</label>
@@ -201,8 +288,8 @@ function fincheck(){
 <label>Name</label>
 <input type="text" name="name"><br>
 <label>E-Mail</label>
-<input type="email" name="email" placeholder="mmk2@naver.com">
-<input type="button" value="dup. check" class="dup" onclick="emailcheck()"><br>
+<input type="email" name="email" id="email" placeholder="mmk2@naver.com">
+<input type="button" value="dup. check" id="emailcheck" class="dup"><br>
 <label>Retype E-Mail</label>
 <input type="email" name="email2"><br>
 </fieldset>
