@@ -61,8 +61,8 @@ bdao.updateReadcount(num);
 BoardBean bb=bdao.getBoard(num);
 String content=bb.getContent();
 if(content!=null){
-	//   /r/n => <br> 바꾸기   문자열.replace("old문자열","new문자열")
-	content=content.replace("\r\n","<br>");		
+   //   /r/n => <br> 바꾸기   문자열.replace("old문자열","new문자열")
+   content=content.replace("\r\n","<br>");      
 }
 %>
 <article>
@@ -75,37 +75,37 @@ if(content!=null){
 <tr><td class="twrite">제목</td><td colspan="3"><%=bb.getSubject() %></td></tr>
 <%
 if(bb.getFile()!=null){
-	// 교재 302페이지
-	%>
-	<tr><td>첨부파일</td><td colspan="3"><a href="file_down.jsp?file_name=<%=bb.getFile()%>"><%=bb.getFile() %></a>
-	
-	<%
-	if(bb.getFile().contains(".jpg")||bb.getFile().contains(".png")||bb.getFile().contains(".jpeg")||bb.getFile().contains(".gif")){
-	%>
-	<img src="../upload/<%=bb.getFile() %>" width="200"	 height="200">
-	<%
-	} 
-	%>
-	
-	</td></tr>
+   // 교재 302페이지
+   %>
+   <tr><td>첨부파일</td><td colspan="3"><a href="file_down.jsp?file_name=<%=bb.getFile()%>"><%=bb.getFile() %></a>
+   
+   <%
+   if(bb.getFile().contains(".jpg")||bb.getFile().contains(".png")||bb.getFile().contains(".jpeg")||bb.getFile().contains(".gif")){
+   %>
+   <img src="../upload/<%=bb.getFile() %>" width="200"    height="200">
+   <%
+   } 
+   %>
+   
+   </td></tr>
 <%
 }
 %>
 <tr><td class="twrite">내용</td><td colspan="3"><%=bb.getContent() %></td></tr>
-</table>
+</table> <!-- 공지 테이블끝 -->
 
 
 <div id="table_search">
 <%
 String id = (String)session.getAttribute("id");
 if(id!=null){
-	if(id.equals(bb.getName())){
-	%>
-	<input type="button" value="글수정" class="btn" 
- 	onclick="location.href='fupdateForm.jsp?num=<%=num%>&pageNum=<%=pageNum%>'">
- 	<input type="button" value="글삭제" class="btn" onclick="del()">
-	<%	
-	}
+   if(id.equals(bb.getName())){
+   %>
+   <input type="button" value="글수정" class="btn" 
+    onclick="location.href='fupdateForm.jsp?num=<%=num%>&pageNum=<%=pageNum%>'">
+    <input type="button" value="글삭제" class="btn" onclick="del()">
+   <%   
+   }
 }
 
 %>
@@ -116,40 +116,28 @@ if(id!=null){
  onclick="location.href='fnotice.jsp?pageNum=<%=pageNum%>'">
 </div>
 
-
-
-
-
-
-
-</div>
-
-</article>
-
 <script type="text/javascript">
 function del(){
-	 if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+    if (confirm("정말 삭제하시겠습니까??") == true){    //확인
 
-	     location.href="deletePro.jsp?num=<%=num %>&pageNum=<%=pageNum %>";
+        location.href="deletePro.jsp?num=<%=num %>&pageNum=<%=pageNum %>";
 
-	 }else{   //취소
+    }else{   //취소
 
-	     return false;
+        return false;
 
-	 }
+    }
 }
 
 function commcheck(){
-	if(document.comm1.content.value=="(150자)"){
-		alert("내용을 입력해주세요!")
-		document.comm1.content.focus();
-		document.comm1.content.select();
-		return false;
-	}
+   if(document.comm1.content.value=="(150자)"){
+      alert("내용을 입력해주세요!")
+      document.comm1.content.focus();
+      document.comm1.content.select();
+      return false;
+   }
 }
 </script>
-
-
 
 
 <div class="clear"></div>
@@ -160,12 +148,12 @@ function commcheck(){
 <div id="comment">
 
 
-	<!-- 댓글달기  -->
+   <!-- 댓글달기  -->
 <form action="comment.jsp?num=<%=num %>&pageNum=<%=pageNum %>" method="get" name="comm1" onsubmit="return commcheck()">
 <%
 if(id!=null){
-	
-	%>
+   
+   %>
 <input type="hidden" name="parent_num" value="<%=num%>">
 <input type="hidden" name="num" value="<%=num%>">
 <table class="commentWrite">
@@ -173,7 +161,7 @@ if(id!=null){
 <td><textarea name="content" rows="1" cols="30" onclick="this.value=''">(150자)</textarea>
 <input type="hidden" name="pageNum" value=<%=pageNum %>>
 <input type="submit" value="댓글등록" class="btn"></td></tr>
-	<%
+   <%
 } else{
 %>
 <tr><td>아이디: <input type="hidden" name="id" value=<%=bb.getName() %> readonly="readonly"></td>
@@ -182,26 +170,10 @@ if(id!=null){
 <%
 }
 %>
-</table>
+</table> <!-- commentWrite테이블끝나는거 -->
 </form>
 
 
-
-<!-- // 댓글 출력  -->
-<!-- CommentDAO cdao = new CommentDAO(); -->
-<!-- CommentBean cb = new CommentBean(); -->
-<!-- ResultSet rs = cdao.selectComment(); -->
-<!-- while(rs.next()){ -->
-<%-- <form action="commentDelete.jsp?num=<%=num %>&pageNum=<%=pageNum %>" method="get" name="comm2"> --%>
-<!-- <table> -->
-<%-- <tr><td><input type="text" name="id2" value=<%=rs.getString("id") %> readonly="readonly"></td> --%>
-<%-- <td><textarea name="comment" rows="1" cols="50"><%=rs.getString("comment") %></textarea> --%>
-<%-- <input type="hidden" name="parent" value=<%=rs.getInt("parent") %>> --%>
-<!-- <input type="submit" value="댓글삭제" class="btn"></td></tr> -->
-<%-- <tr><td><%=rs.getTimestamp("date") %></td></tr> --%>
-<!-- </table> -->
-<!-- </form> -->
-<!-- } -->
 
 
 
@@ -217,43 +189,43 @@ contentNum: <%=bb.getNum() %>
 count: <%=count %>
 <table id="comment">
 <tr>
-	<th class="commIdx">No.</th>
+   <th class="commIdx">No.</th>
     <th class="twrite">ID</th>
     <th class="date">Date</th>
     <th class="tcomment">Comment</th>
     <th> </th></tr>
     <%
     for(int i=0;i<commentList.size();i++){
-    	CommentBean cb2=commentList.get(i);
-    	idx = cb2.getIdx();
-    	%>
+       CommentBean cb2=commentList.get(i);
+       idx = cb2.getIdx();
+       %>
 <tr>
-	<td><input type="hidden" name="idx" value="<%=idx%>"><%=i+1 %></td>
+   <td><input type="hidden" name="idx" value="<%=idx%>"><%=i+1 %></td>
     <td class="center"><%=cb2.getId() %></td>
     <td><%=sdf.format(cb2.getDate()) %></td>
-    <td><%=cb2.getContent() %></td> 	
+    <td><%=cb2.getContent() %></td>    
     <td><input type="button" value="x" name="deleteComment" onclick="commentDelete('<%=idx%>')"></td></tr>   
-    	<%
+       <%
     }
 
 %>
-</table> <!-- comment table -->
+</table>
 
 </div>
-
+</article>
 
 <script type="text/javascript">
 function commentDelete(idx){
-	 if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+    if (confirm("정말 삭제하시겠습니까??") == true){    //확인
 
-	   
-		location.href = "commentDelete.jsp?idx="+idx+"&num=<%=num%>&pageNum=<%=pageNum%>";
+      
+      location.href = "commentDelete.jsp?idx="+idx+"&num=<%=num%>&pageNum=<%=pageNum%>";
 
-	 }else{   //취소
+    }else{   //취소
 
-	     return false;
+        return false;
 
-	 }
+    }
 }
 </script>
 
@@ -267,6 +239,6 @@ function commentDelete(idx){
 <!-- 푸터들어가는 곳 -->
 <jsp:include page="../inc/bottom.jsp" />
 <!-- 푸터들어가는 곳 -->
-</div>
+</div> <!-- wrap end -->
 </body>
 </html>
